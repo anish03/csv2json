@@ -1,12 +1,11 @@
 import sys
 import pandas as pd
 import numpy as np
+import time
 
 def main():
-    print len(sys.argv)
     df = pd.read_csv('yelp_business.csv')
-    print len(df)
-    df = df.head(8000)
+    df = df.head(1000)
     h1 = h = list(df.columns.values)
 
     for item in h:
@@ -25,10 +24,8 @@ def main():
         headers.append(s)
 
     for i in range(len(df.iloc[:])):
-
         rec = '{'
         for j in range(len(headers)):
-
             if j == len(headers) - 1:
                 rec += '{'+headers[j]+':'+ str('"'+df.iloc[i][h[j]]+'"')+'}'
             else:
@@ -38,4 +35,7 @@ def main():
     target.close()
 
 if __name__ == '__main__':
+    start = time.time()
     main()
+    end = time.time()
+    print end - start
